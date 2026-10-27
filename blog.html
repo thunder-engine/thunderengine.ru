@@ -1,0 +1,46 @@
+---
+layout: default
+title: Блог разработки Thunder Engine
+permalink: /blog/
+---
+<div class="body-image"><img src="/imges/community.jpg"></div>
+{% assign pinned_posts = site.posts | where: "pinned", true %}
+{% if pinned_posts.size > 0 %}
+{% assign hero_post = pinned_posts | first %}
+<section id="hero">
+	<div class="post-hero">
+		<a href="{{ hero_post.url }}">
+			<div class="hero-card">
+				<img src="{{ hero_post.image }}" alt="{{ hero_post.title }}">
+				<div class="hero-text">
+					<h1>{{ hero_post.title }}</h1>
+					<div class="post-tag">Закреплено</div>
+					<p>{{ hero_post.excerpt | strip_html | truncate: 200 }}</p>
+					<div class="content-button">Читать далее</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</section>
+{% endif %}
+
+<section id="post">
+	<div class="content">
+		<div class="content-grid">
+{% for post in site.posts %}
+			<div class="content-card">
+				<div class="content-block">
+					<img src="{{ post.image }}">
+					<h3 id="editor-title">{{ post.title }}</h3>
+					{{ post.excerpt }}
+					<div href="{{ post.url }}" class="content-button">Читать далее</div>
+				</div>
+			</div>
+{% endfor %}
+		</div>
+	</div>
+</section>
+
+<section id="ready">
+    <div class="hero-content"></div>
+</section>

@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<div class="body-image"><img src="/imges/community.jpg"></div>
+<section id="hero">
+    <div class="post-hero">
+		<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %B %Y" }}</time>
+		{% if page.author %}<span> автор: {{ page.author }}</span>{% endif %}
+        <h1>{{ page.title }}</h1>
+		{% for tag in page.tags %}<a href="#" class="post-tag">{{ tag }}</a>{% endfor %}
+    </div>
+</section>
+<section id="post">
+	<div class="post-content">
+		{{ content }}
+	</div>
+</section>
+<section id="ready">
+    <div class="hero-content"></div>
+</section>

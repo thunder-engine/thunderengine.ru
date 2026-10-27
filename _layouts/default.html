@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+	<link rel="icon" href="/favicon.ico">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}Thunder Engine</title>
+</head>
+<body>
+	<div class="body-image"></div>
+    <header id="header">
+		<div class="content-header">
+			<a href="https://thunderengine.ru"><img src="/icons/thunderlight.svg"></a>
+			<nav class="right-nav">
+				<ul>
+					<li>
+						<a href="https://thunderengine.ru/download">Скачать</a>
+					</li>
+					<li>
+						<a href="https://thunderengine.ru/blog">Блог</a>
+					</li>
+					<li>
+						<a href="https://docs.thunderengine.org/" target="_blank">Документация</a>
+					</li>
+					<li>
+						<a href="https://github.com/thunder-engine/thunder" target="_blank">GitHub</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+    </header>
+	<main>
+{{ content }}
+	</main>
+    <footer>
+        <div class="content">
+			<div class="right-nav" style="justify-content: end;">
+				<a href="#header" class="back-to-top" aria-label="Наверх"><img src="/icons/arrow-top.svg"></a>
+			</div>
+            <div class="social-icons">
+				<a href="https://github.com/thunder-engine/thunder" target="_blank"><img src="/icons/github.svg" width="32"></a>
+                <a href="https://discord.gg/k8qsJxnw4Q" target="_blank"><img src="/icons/discord.svg" width="32"></a>
+                <a href="https://vk.ru/thunderengine" target="_blank"><img src="/icons/vk.svg" width="32"></a>
+                <a href="https://t.me/thunder_notes" target="_blank"><img src="/icons/telegram.svg" width="32"></a>
+            </div>
+			<div class="links">
+				<h3>Поддержка</h3>
+				<a href="https://docs.thunderengine.org/" target="_blank">Документация</a>
+				<a href="https://github.com/thunder-engine/thunder/issues" target="_blank">Сообщить о проблеме</a>
+				<a href="https://github.com/thunder-engine/thunder/projects/1" target="_blank">Дорожная карта</a>
+				<a href="https://github.com/thunder-engine/thunder/discussions" target="_blank">Задать вопрос</a>
+			</div>
+			<hr>
+			<p id="copyright">Thunder Engine - Copyright &copy; 2010-2026 Evgeniy Prikazchikov</p>
+        </div>
+    </footer>
+</body>
+</html>
