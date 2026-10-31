@@ -9,15 +9,54 @@
 </head>
 <body>
 	<script type="text/javascript">
-		(function(m,e,t,r,i,k,a){
-			m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-			m[i].l=1*new Date();
-			for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-			k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-		})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113917614', 'ym');
-		ym(113917614, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-	</script>
-	<noscript><div><img src="https://mc.yandex.ru/watch/113917614" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        function initYandexMetrika() {
+            (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113917614', 'ym');
+            ym(113917614, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+        }
+
+        (function() {
+            var CONSENT_KEY = 'ym_consent';
+            var consent = null;
+            try { consent = localStorage.getItem(CONSENT_KEY); } catch (e) {}
+
+            if (consent === 'accepted') {
+                initYandexMetrika();
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var banner = document.getElementById('cookie-banner');
+                if (!banner) return;
+
+                if (consent !== 'accepted' && consent !== 'rejected') {
+                    banner.style.display = 'block';
+                }
+
+                var acceptBtn = document.getElementById('cookie-accept');
+                var rejectBtn = document.getElementById('cookie-reject');
+
+                if (acceptBtn) {
+                    acceptBtn.addEventListener('click', function() {
+                        try { localStorage.setItem(CONSENT_KEY, 'accepted'); } catch (e) {}
+                        banner.style.display = 'none';
+                        initYandexMetrika();
+                    });
+                }
+
+                if (rejectBtn) {
+                    rejectBtn.addEventListener('click', function() {
+                        try { localStorage.setItem(CONSENT_KEY, 'rejected'); } catch (e) {}
+                        banner.style.display = 'none';
+                    });
+                }
+            });
+        })();
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/113917614" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 	<div class="body-image"></div>
     <header id="header">
 		<div class="content-header">
@@ -65,5 +104,96 @@
 			<p id="copyright">Thunder Engine - Copyright &copy; 2010-2026 Evgeniy Prikazchikov</p>
         </div>
     </footer>
+	<div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Согласие на использование куки" style="display:none;">
+        <div class="cookie-banner__content">
+            <p class="cookie-banner__text">
+                Мы используем файлы cookie и Яндекс Метрику для анализа посещаемости.
+                Продолжая пользоваться сайтом, вы соглашаетесь с
+                <a href="/privacy" target="_blank" rel="noopener">политикой конфиденциальности</a>.
+            </p>
+            <div class="cookie-banner__actions">
+                <button type="button" id="cookie-accept" class="cookie-banner__btn cookie-banner__btn--accept">Принять</button>
+                <button type="button" id="cookie-reject" class="cookie-banner__btn cookie-banner__btn--reject">Отклонить</button>
+            </div>
+        </div>
+    </div>
+    <style>
+        #cookie-banner {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            background-color: #424242f0;
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 16px;
+            box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.25);
+        }
+        .cookie-banner__content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .cookie-banner__text {
+            margin: 0;
+            font-size: 14px;
+            line-height: 20px;
+            flex: 1 1 400px;
+            opacity: 0.9;
+        }
+        .cookie-banner__text a {
+            color: #4fc3f7;
+            text-decoration: underline;
+        }
+        .cookie-banner__actions {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .cookie-banner__btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .cookie-banner__btn:hover {
+            transform: translateY(-1px);
+        }
+        .cookie-banner__btn--accept {
+            background-color: #4fc3f7;
+            color: #13495C;
+        }
+        .cookie-banner__btn--accept:hover {
+            background-color: #7fd4f9;
+        }
+        .cookie-banner__btn--reject {
+            background-color: transparent;
+            color: #fff;
+            border: 1px solid #ffffff66;
+        }
+        .cookie-banner__btn--reject:hover {
+            background-color: #ffffff1a;
+        }
+        @media (max-width: 600px) {
+            .cookie-banner__content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .cookie-banner__actions {
+                justify-content: stretch;
+            }
+            .cookie-banner__btn {
+                flex: 1;
+            }
+        }
+    </style>
 </body>
 </html>
